@@ -1,0 +1,81 @@
+What is typedef and what does it do?
+- creates an alias for a type. This is a user-defined type. It takes first the type   that it wants to alias, and then the new name. Ex: typedef int apples;
+
+
+What is an enumeration and what is it used for?
+- similar to typedef, you are masking an alternative. An alternative could be a color,    sizes of something, any quality of something like if a number is prime, odd or even,    whether a   person is single, married, or divorce, gender, etc... 
+  Any alternative that you want to model in your system, one way is using enumeration.
+  There are big differences between the C language and C++ language with enumerations.   A typedef in C++ can help differentiate between types. For example: the C++ compiler   will   distinguish between "apples" and "oranges" that are user-defined types.
+
+
+What is a struct and what does it do?
+- they are aggregations of data. You make up types out of many variables (0 or more;   you can create a struct that is empty and that would be valid). When you include variables they are   called fields. Prototyping is leaving a struct empty with the intention of coming back and fleshing it out. You can create code around the struct even before knowing what is inside the   struct. For example, you could shuffle a deck of cards without knowing what a deck of cards is.
+
+
+What is the selector operator, what does it do and when is it used?
+- the selector operator allows you to apply instructions to the fields in a struct. For example:   card -> suit I am taking the card and selecting the suit. 
+
+  However, if you have a variable on the stack frame of the code, the selector operator will take the shape of a dot. Stack frame: the curly braces that contain the code. This is not about   code execution, but about the variables that are declared in that function. This is NOT the Call Stack- the Call Stack is analogous to the story of Hansel & Gretel. Think breadcrumbs -   they are in reverse order! That's why its called a stack and not a list! This is not about execution but which function the computer will return to in order to restore the point of   execution. Where was I called from?
+
+
+Explain void Card_print function (line 24)? Why are we using the %c and %s placeholders?
+
+- the function will not return anything, thats why its return type is void. 
+
+  Name is Card_print. 
+  
+  It takes one parameter, it has many words but there's only one. Many programming languages      support idioms to declare parameters as passed by reference. In C, there is no concept of   passing by reference. When you pass by reference, the function will recieve the variable itself. When you pass by value, the function recieves a COPY of the variable. 
+
+  The idea is that you define small things and you then build upon them. The biggest point here is independence. Functions *must be independent*. The opposite of independence when it comes   to functions is called side-effects. We want to avoid side-effects, a function is not pure if it has side-effects. One of the attributes of a pure function is its deterministic. If I call   a function several times with the same parameters, and the function returns the same value everytime the function is considered deterministic. If it does not do this, then it is   indeterministic and this could be due to the function having side-effects. 
+
+  Sometimes you are looking for side-effects! Shuffling the deck is an example. 
+
+  Functional programming is all about keeping functions pure! There are even some languages that are purely for functional programming such as lisp, F#, SCALA etc... However, these is   extremely resource expensive! But the benefit is that the code is so much more composable. Autocad is an example of a piece of software that changed computing, and forces the user to   write the scripts for it in a completely functional way. In order to create an object or do other things in Autocad you would have use Lisp! 
+
+  Mathematicians keep functions pure. This is one difference between a programmers mind and a mathematicians mind. 
+
+  It is very likely that a programmer will abandon this. In order to conserve resources, many programmers will resort to passing by reference. So much so that the default way of passing   variables in many programming languages is by reference.     
+
+  In C, we pass by value ONLY! There is no way of passing by reference.
+  .... however,
+  Where there is a will, there is a way. 
+
+  You can pass by value a pointer. You are giving the function the actual position in memory.
+
+  That is why we don't pass a Deck by value, always a pointer to a Deck! A Deck is nearly a kilobyte in size! If we passed the Deck by value that would result in a painfully slow program.
+
+  On line 35, the Deck has the word const in front of the pointer. We only want the function to read it but not write to it. When we don't want side-effects, but we also don't want to have   to make a copy we can give the function a pointer but make it const to prevent the contents of being modified.  
+
+
+
+Explain what's going on in line 38?
+
+
+
+Explain what's going on in the second for loop in Deck_initialize()?
+- Remember the concept discussed above about passing pointers? 
+  While it is true that can't modify what is being pointed to by the const pointer, you can change the   const pointer   to point to something else! 
+  This gets into the discussion of knowing what you are allowed to do in programming. Dont be too conservative   because you will then be blind to knowing what else is possible. 
+
+
+Why does renaming the functions to what we did on 02/28 make the program more object-oriented?
+- OOP is about containing responsibilites within sections of the code. Those responsibilities are   expressed as two things mainly: (1)the data, (2)and the operations defined on that data.   They   need to be identifiably close together (be in the same area).For example if I wanted to find   everything   that I can do with Cards, I would look for the functions that have the   "Card_"     prefix. Same applies to "Deck_". These are not part of the language, but rather conventions   that we use to tie things together. 
+
+  The first parameter is going to be an object of that type.   Ex: void Card_print(Card___) 
+
+
+Inside srand, why is time(NULL) inside and what does that do?
+
+- Srand initilizes the psuedorandom operator. Time is a function that gets you how many seconds happens since the midnight of december 31st 1970. If you pass it a pointer it will store that value for you. If you don't want it to store anything, you place NULL inside. 
+As long as we start the program on a different second we will get a different shuffle.  
+
+
+Why are we using the ampersand symbol in main() for Deck_initialize() and Deck_print()?
+- We are creating a variable called a deck on line 16. In C, there is no way to pass a parameter by reference. But we need the operation to work on the deck itself, and not a copy of the deck. In order for us to do that we get the address of the deck in memory and that is what we pass. The ampersand before a symbol is read as the "address of operator".
+
+
+What is puts(), what does it do, and when is it used?
+- Put on the screen. Printf formats an argument. If you have already done what you needed to do and just want to show some string to the screen puts() is more straightforward. This is much more simple. It will also add a newline to what you add to the screen. 
+
+
+

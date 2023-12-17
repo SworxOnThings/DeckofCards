@@ -1,0 +1,26 @@
+Main() is controlling the order in which all functions are being called, correct?
+
+
+Line 11 in deck.c, is next a pointer? why is result selecting next in initialization? When is it okay to assign a variable to NULL vs. assigning it to zero?
+
+
+Whenever we want to declare and initialize a Card pointer why does the word struct have to come before Card*?
+
+
+Why did we create the type MCard(Marker Card)?
+
+
+Why did we abstract the three phases of the for loop on Line 18?
+
+
+Why did we have to typecast the return value of Deck_begin to MCard? Explain what the return value is doing.
+
+
+
+What is going on in the definition of function Deck_next_card?
+
+
+How does Deck_end work?
+
+
+What is going on in the definition of Deck_shuffle? Why is the invariant set to run the for loop 999 times? Whats going on inside the for loop?
